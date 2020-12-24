@@ -419,4 +419,32 @@ function Arrays.max(array, cmp)
     return max
 end
 
+---@param array any[]
+---@param v any
+---@param cmp function
+---@return number
+function Arrays.binarySearch(array, v, cmp)
+    cmp = cmp or _cmp
+    local first, last = 1, #array
+    while first <= last do
+        local mid = math.floor((first + last) / 2)
+        if array[mid] < v then
+            first = mid + 1
+        elseif array[mid] > v then
+            last = mid - 1
+        else
+            return mid
+        end
+    end
+    return -1
+end
+
+---@param array any[]
+---@param first number
+---@param last number
+---@return ...
+function Arrays.unpack(array, first, last)
+    return table.unpack(array, first, last)
+end
+
 return Arrays
